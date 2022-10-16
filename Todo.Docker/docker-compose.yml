@@ -1,0 +1,28 @@
+#/opt/mssql-tools/bin/sqlcmd -S localhost -U <username> -P <password>
+
+version: "3.2"
+
+services:
+    #MS SQL Server Express edition (Production)
+    Todo.Database:
+        container_name: todo.db
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        hostname: todo.db
+        environment:
+          - ACCEPT_EULA
+          - MSSQL_PID
+          - SA_PASSWORD
+        ports:
+            - ${MSSQL_PORT}:${MSSQL_PORT}
+         
+    #MS SQL Server Express edition (Development)
+    Todo.Database-Dev:
+        container_name: todo.db-dev
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        hostname: todo.db-dev
+        environment:
+          - ACCEPT_EULA
+          - MSSQL_PID
+          - SA_PASSWORD
+        ports:
+            - "11433:${MSSQL_PORT}"
